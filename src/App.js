@@ -1,62 +1,52 @@
-import React from 'react';
-import { Navbar, Container, Nav, Row, Col, Card } from 'react-bootstrap';
+import React from "react";
+import { Container, Card } from "react-bootstrap";
+import Image from "./Image";
+import Name from "./Name";
+import Price from "./Price";
+import Description from "./Description";
+import product from "./product";
+
+// Provide your first name here; leave "" to test the fallback
+const firstName = "Augustine"; // e.g., "" if not provided
 
 export default function App() {
+  const hasName = firstName && firstName.trim().length > 0;
+
   return (
     <>
-      {/* React Fragment shorthand ^ groups without adding a DOM node */}
       <div className="App">
-        <Navbar bg="dark" variant="dark" expand="md" className="mb-4">
-          <Container>
-            <Navbar.Brand href="#">My React-Bootstrap App</Navbar.Brand>
-            <Navbar.Toggle aria-controls="main-nav" />
-            <Navbar.Collapse id="main-nav">
-              <Nav className="ms-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#features">Features</Nav.Link>
-                <Nav.Link href="#about">About</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+        <Container className="py-4">
+          <Card className="shadow-sm">
+            <Image />
 
-        <Container>
-          <h1 className="mb-4">Welcome to React Bootstrap 👋</h1>
+            <Card.Body>
+              <Card.Title className="d-flex justify-content-between align-items-center">
+                <span><Name /></span>
+                <strong><Price /></strong>
+              </Card.Title>
 
-          <Row xs={1} md={3} className="g-4">
-            <Col>
-              <Card className="h-100">
-                <Card.Body>
-                  <Card.Title>Card One</Card.Title>
-                  <Card.Text>
-                    This is a simple card built with react-bootstrap.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
+              <Card.Text>
+                <Description />
+              </Card.Text>
+            </Card.Body>
+          </Card>
 
-            <Col>
-              <Card className="h-100">
-                <Card.Body>
-                  <Card.Title>Card Two</Card.Title>
-                  <Card.Text>
-                    Use Row and Col to lay out responsive grids.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
+          {/* Greeting & conditional image */}
+          <div className="text-center mt-4">
+            <h5>
+              Hello, {hasName ? firstName : "there!"}
+            </h5>
 
-            <Col>
-              <Card className="h-100">
-                <Card.Body>
-                  <Card.Title>Card Three</Card.Title>
-                  <Card.Text>
-                    Customize via Bootstrap utility classes.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+            {hasName && (
+              <img
+                src={`https://i.pravatar.cc/100?u=${encodeURIComponent(firstName)}`}
+                alt={`${firstName}'s avatar`}
+                width="80"
+                height="80"
+                style={{ borderRadius: "50%", marginTop: 8 }}
+              />
+            )}
+          </div>
         </Container>
       </div>
     </>
